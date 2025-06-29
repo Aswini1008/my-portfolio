@@ -48,9 +48,9 @@ const About = () => {
                 { value: '4+', label: 'Projects' },
                 { value: '3+', label: 'Internships' },
                 { value: 'Java', label: 'Backend Focus' },
-              ].map((card, index) => (
+              ].map((card) => (
                 <motion.div
-                  key={index}
+                  key={card.label}
                   whileHover={{ scale: 1.05, y: -4 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                   className="rounded-xl bg-[#1f0a3a] border border-pink-400/30 text-center p-4 shadow-md hover:shadow-pink-500/30 transition-all duration-300"

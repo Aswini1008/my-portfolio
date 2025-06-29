@@ -1,17 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp, Github, Linkedin } from 'lucide-react';
+import { ArrowUp, Github, Linkedin } from 'lucide-react'; // ✅ Correct import
 
-const Footer = () => {
-  const scrollToTop = () => {
+const Footer: React.FC = () => {
+  const scrollToTop = (): void => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const navLinks = [
+    { label: 'Home', anchor: '#home' },
+    { label: 'About', anchor: '#about' },
+    { label: 'Experience', anchor: '#experience' },
+    { label: 'Skills', anchor: '#skills' },
+    { label: 'Projects', anchor: '#projects' },
+    { label: 'Contact', anchor: '#contact' },
+  ];
 
   return (
     <footer className="bg-gradient-to-r from-[#0e0e1c] via-[#1a0033] to-[#0e0e1c] border-t border-violet-700/20 text-white">
       <div className="section-container py-12 px-6 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-10 mb-10">
-          {/* Brand */}
+          {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +34,7 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          {/* Quick Links */}
+          {/* Quick Navigation Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -33,20 +42,20 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <h4 className="text-lg font-semibold text-slate-200 mb-4">Quick Links</h4>
-            <nav className="space-y-2 text-sm">
-              {['Home', 'About', 'Experience', 'Skills', 'Projects', 'Contact'].map((item) => (
+            <nav className="space-y-2 text-sm" aria-label="Footer Navigation">
+              {navLinks.map((link) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={link.label}
+                  href={link.anchor}
                   className="block text-slate-400 hover:text-purple-400 hover:underline underline-offset-4 transition-all duration-300"
                 >
-                  {item}
+                  {link.label}
                 </a>
               ))}
             </nav>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Contact Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -69,6 +78,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition"
+                  aria-label="GitHub Profile"
                 >
                   <Github className="w-5 h-5 text-slate-400 hover:text-purple-400" />
                 </a>
@@ -77,6 +87,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition"
+                  aria-label="LinkedIn Profile"
                 >
                   <Linkedin className="w-5 h-5 text-slate-400 hover:text-purple-400" />
                 </a>
@@ -86,7 +97,7 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Footer Bottom Bar */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -95,7 +106,7 @@ const Footer = () => {
           className="border-t border-slate-700 pt-6 flex flex-col md:flex-row items-center justify-between"
         >
           <p className="text-slate-500 text-xs mb-3 md:mb-0">
-            © 2025 Aswini SM. Built with ❤️ using React.js
+            © {new Date().getFullYear()} Aswini SM. Built with ❤️ using React.js
           </p>
 
           <motion.button
