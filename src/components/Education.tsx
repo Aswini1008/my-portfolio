@@ -67,7 +67,7 @@ const Education = () => {
           {educationList.map((edu, index) => (
             <motion.div
               key={index}
-              variants={cardVariants}
+
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.4 }}
