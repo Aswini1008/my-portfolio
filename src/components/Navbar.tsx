@@ -1,76 +1,71 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+
+const sections = ['home', 'about', 'projects', 'skills', 'experience', 'contact'];
 
 const Navbar = () => {
+  const [activeSection, setActiveSection] = useState('home');
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 120;
+      let current = 'home';
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el && el.offsetTop <= scrollPos) {
+          current = section;
+        }
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-lg">
-      <div className="section-container flex items-center justify-between py-4 px-6">
-        {/* Logo */}
-        <a href="#home" className="text-2xl font-bold text-violet-400 hover:text-violet-300 transition">
-          Aswini<span className="text-slate-300">.</span>
-        </a>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 text-slate-300 font-medium">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="hover:text-violet-400 transition-colors"
+    <>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#1a0033] via-[#27004d] to-[#1a0033] shadow-md backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center text-white font-medium">
+          <div className="text-3xl font-bold text-purple-300">Aswini</div>
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white focus:outline-none text-2xl"
             >
-              {link.name}
-            </a>
-          ))}
-        </nav>
-
-        {/* Mobile Toggle */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-slate-300 focus:outline-none"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-slate-900/95 backdrop-blur-sm border-t border-slate-800"
-          >
-            <div className="flex flex-col items-center py-4 space-y-4 text-slate-200">
-              {navLinks.map((link) => (
+              ☰
+            </button>
+          </div>
+          <ul className={`md:flex gap-10 text-lg ${isOpen ? 'block mt-4' : 'hidden'} md:mt-0 md:block`}> 
+            {sections.map((sec) => (
+              <li key={sec}>
                 <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="hover:text-violet-400 text-lg transition-colors"
+                  href={`#${sec}`}
+                  className={`block py-2 md:py-0 transition-colors duration-300 hover:text-purple-300 ${
+                    activeSection === sec ? 'text-fuchsia-400 font-bold' : 'text-white'
+                  }`}
                 >
-                  {link.name}
+                  {sec.charAt(0).toUpperCase() + sec.slice(1)}
                 </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {/* Page Indicator */}
+      <div className="fixed top-1/2 right-4 transform -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4">
+        {sections.map((sec) => (
+          <a
+            key={sec}
+            href={`#${sec}`}
+            className={`w-4 h-4 rounded-full ${
+              activeSection === sec ? 'bg-fuchsia-400 scale-125' : 'bg-slate-500'
+            } transition-all`}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

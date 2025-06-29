@@ -57,7 +57,10 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-900 text-white">
+    <section
+      id="contact"
+      className="py-24 bg-gradient-to-br from-[#1a0033] via-[#27004d] to-[#1a0033] text-white"
+    >
       <div className="max-w-6xl mx-auto px-6">
         {/* Heading */}
         <motion.div
@@ -66,11 +69,10 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-violet-400">Contact Me</h2>
-          <p className="text-lg text-slate-400">Let’s connect! Send me a message below.</p>
+          <h2 className="text-4xl font-bold mb-4 text-fuchsia-400">Contact Me</h2>
+          <p className="text-lg text-slate-300">Let’s connect! Send me a message below.</p>
         </motion.div>
 
-        {/* Grid Layout */}
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -82,8 +84,9 @@ const Contact = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="bg-slate-800 text-white border border-slate-700 focus:border-violet-500"
+                className="bg-slate-800 text-white border border-slate-700 focus:border-fuchsia-500"
                 placeholder="Your name"
+                aria-label="Your name"
               />
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
@@ -97,8 +100,9 @@ const Contact = () => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="bg-slate-800 text-white border border-slate-700 focus:border-violet-500"
+                className="bg-slate-800 text-white border border-slate-700 focus:border-fuchsia-500"
                 placeholder="Your email"
+                aria-label="Your email"
               />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
@@ -112,8 +116,9 @@ const Contact = () => {
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
-                className="bg-slate-800 text-white border border-slate-700 focus:border-violet-500"
+                className="bg-slate-800 text-white border border-slate-700 focus:border-fuchsia-500"
                 placeholder="Your message"
+                aria-label="Your message"
               />
               {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
             </div>
@@ -122,28 +127,29 @@ const Contact = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-violet-600 hover:bg-violet-700 text-white text-lg py-3 rounded-lg shadow-md"
+              className="w-full bg-fuchsia-600 hover:bg-fuchsia-700 text-white text-lg py-3 rounded-lg shadow-lg"
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </Button>
           </form>
 
-          {/* Info Section */}
+          {/* Info Sidebar */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-slate-800/60 backdrop-blur-md border border-slate-700 p-8 rounded-2xl shadow-lg"
+            className="bg-slate-800 border border-slate-700 p-8 rounded-2xl shadow-xl"
           >
-            <h3 className="text-2xl font-semibold text-violet-300 mb-4">Let’s Collaborate</h3>
+            <h3 className="text-2xl font-semibold text-fuchsia-300 mb-4">Let’s Collaborate</h3>
             <p className="text-slate-400 mb-6">
               Looking for a developer, collaborator, or just want to connect? Let’s talk!
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-4 text-sm">
               <a
                 href="mailto:smaswini006@gmail.com"
-                className="flex items-center gap-3 text-slate-300 hover:text-violet-400 transition-colors"
+                className="flex items-center gap-3 text-slate-300 hover:text-fuchsia-400 transition-colors"
+                aria-label="Send email to Aswini"
               >
                 <Mail className="w-5 h-5" />
                 smaswini006@gmail.com
@@ -153,7 +159,8 @@ const Contact = () => {
                 href="https://github.com/Aswini1008"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-slate-300 hover:text-violet-400 transition-colors"
+                className="flex items-center gap-3 text-slate-300 hover:text-fuchsia-400 transition-colors"
+                aria-label="Visit GitHub"
               >
                 <Github className="w-5 h-5" />
                 GitHub
@@ -163,7 +170,8 @@ const Contact = () => {
                 href="https://www.linkedin.com/in/aswini-sm-97292629a"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-slate-300 hover:text-violet-400 transition-colors"
+                className="flex items-center gap-3 text-slate-300 hover:text-fuchsia-400 transition-colors"
+                aria-label="Visit LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn

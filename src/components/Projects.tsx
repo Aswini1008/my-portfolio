@@ -47,8 +47,11 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-slate-900/90">
-      <div className="section-container">
+    <section
+      id="projects"
+      className="py-24 bg-gradient-to-tr from-[#1a0033] via-[#27004d] to-[#1a0033] text-white"
+    >
+      <div className="max-w-6xl mx-auto px-6 sm:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,8 +59,10 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-violet-400">Featured Projects</h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          <h2 className="text-5xl font-bold mb-4 text-violet-400 drop-shadow-xl">
+            Featured Projects
+          </h2>
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
             A curated list of my top projects showcasing skills in full-stack development,
             APIs, and UI design.
           </p>
@@ -71,8 +76,8 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
               viewport={{ once: true }}
-              whileHover={{ y: -6 }}
-              className="rounded-2xl overflow-hidden group border border-slate-700 hover:border-violet-500 transition-all duration-300 bg-slate-800/50 backdrop-blur-md shadow-md hover:shadow-violet-500/30"
+              whileHover={{ scale: 1.02 }}
+              className="rounded-2xl overflow-hidden group border border-violet-800 hover:border-fuchsia-400 transition-all duration-300 bg-[#1b0533] shadow-md hover:shadow-fuchsia-500/30"
             >
               {/* Image Section */}
               <div className="relative">
@@ -82,7 +87,7 @@ const Projects = () => {
                   alt={project.title}
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a12] to-transparent opacity-60" />
               </div>
 
               {/* Content Section */}
@@ -96,7 +101,7 @@ const Projects = () => {
                   {project.technologies.map((tech, i) => (
                     <span
                       key={i}
-                      className="text-xs px-3 py-1 border border-violet-400/40 bg-violet-900/20 text-violet-300 rounded-full"
+                      className="text-xs px-3 py-1 border border-fuchsia-400/30 bg-fuchsia-900/20 text-fuchsia-300 rounded-full"
                     >
                       {tech}
                     </span>
@@ -105,35 +110,32 @@ const Projects = () => {
 
                 <div className="flex gap-3">
                   {project.demoUrl && (
-                    <Button
-                      size="sm"
-                      className="bg-violet-600 hover:bg-violet-700 text-white flex-1 text-sm font-semibold"
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1"
                     >
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <Button className="w-full bg-fuchsia-600 hover:bg-fuchsia-700 text-white text-sm font-semibold transition-colors">
                         Live Demo
-                      </a>
-                    </Button>
+                      </Button>
+                    </a>
                   )}
                   {project.codeUrl && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="bg-white text-slate-900 border border-slate-300 hover:bg-violet-50 transition-colors flex items-center gap-1"
+                    <a
+                      href={project.codeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center"
                     >
-                      <a
-                        href={project.codeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center"
+                      <Button
+                        variant="outline"
+                        className="text-white border border-fuchsia-400 hover:bg-fuchsia-800/20 text-sm font-semibold gap-1"
                       >
                         <Github className="w-4 h-4" />
                         Code
-                      </a>
-                    </Button>
+                      </Button>
+                    </a>
                   )}
                 </div>
               </div>
